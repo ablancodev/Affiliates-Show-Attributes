@@ -11,4 +11,4 @@ Examples:
 
 [aff-show-attributes show_attributes="coupons,referral.rate" separator="-" /]
 
-By default separator is "<br>".
+By default separator is " &lt;br &gt;".
