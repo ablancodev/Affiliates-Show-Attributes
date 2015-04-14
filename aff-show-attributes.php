@@ -17,6 +17,7 @@ function aff_show_attributes ($attr = array()) {
 	$output = "";
 	$sep =  isset( $attr['separator'] ) ? $attr['separator'] : "<br>";
 	
+	$show_name = isset( $attr['show_name'] ) ? $attr['show_name'] : null;
 	$keys = isset( $attr['show_attributes'] ) ? $attr['show_attributes'] : null;
 	
 	$aff_id = Affiliates_Affiliate_WordPress::get_user_affiliate_id();
@@ -24,6 +25,14 @@ function aff_show_attributes ($attr = array()) {
 		return $output; 
 	}
 	
+	$current_user = wp_get_current_user();
+    	if ( $show_name ) {
+		$output .= $current_user->user_login . $sep;
+	}
+	if ( $show_email ) {
+		$output .= $current_user->user_email . $sep;
+	}
+
 	if ( $keys ) {
 		$keys = explode( ",", $keys );
 		$tempkeys = array();
@@ -45,17 +54,18 @@ function aff_show_attributes ($attr = array()) {
 		foreach ( $attributes as $attribute ) {
 			$values[$attribute->attr_key] = $attribute->attr_value;
 		}
-		$IXAP361 = Affiliates_Attributes::get_keys();
+	//	$keys = Affiliates_Attributes::get_keys();
 		foreach ( $keys as $key ) {
 			$attrValue = isset( $values[$key] ) ? $values[$key] : '';
 			
 			$output .= esc_attr( $attrValue ) . $sep;
 		}
-		
-		if ( strlen($output)>0 ) { // delete last separator
-			$output = substr($output, 0, strlen($output)-strlen($sep));
-		}
 	}
+	
+	if ( strlen($output)>0 ) { // delete last separator
+		$output = substr($output, 0, strlen($output)-strlen($sep));
+	}
+	
 	
 	return $output;
 				
