@@ -18,6 +18,7 @@ function aff_show_attributes ($attr = array()) {
 	$sep =  isset( $attr['separator'] ) ? $attr['separator'] : "<br>";
 	
 	$show_name = isset( $attr['show_name'] ) ? $attr['show_name'] : null;
+	$show_email = isset( $attr['show_email'] ) ? $attr['show_email'] : null;
 	$keys = isset( $attr['show_attributes'] ) ? $attr['show_attributes'] : null;
 	
 	$aff_id = Affiliates_Affiliate_WordPress::get_user_affiliate_id();
